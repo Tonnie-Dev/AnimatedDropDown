@@ -27,9 +27,16 @@ fun DropDown(text: String, content: @Composable () -> Unit, initiallyOpened: Boo
     var isOpen by remember { mutableStateOf(initiallyOpened) }
 
 
+    //Animate alpha value
     val alpha = animateFloatAsState(
         targetValue = if (isOpen) 1f else 0f,
-        animationSpec = tween(durationMillis = 100)
+        animationSpec = tween(durationMillis = 300)
+    )
+
+    //Animate rotationX as the 3D anim rotation is along the X-Axis
+    val rotationX = animateFloatAsState(
+        targetValue = if (isOpen) 0f else -90f,
+        animationSpec = tween(durationMillis = 300)
     )
 
 }
