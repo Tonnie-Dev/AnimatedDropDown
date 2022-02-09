@@ -5,7 +5,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import com.uxstate.animateddropdown.ui.theme.AnimatedDropDownTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,4 +53,29 @@ fun DropDown(text: String, content: @Composable () -> Unit, initiallyOpened: Boo
         animationSpec = tween(durationMillis = 300)
     )
 
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Text(text = text, color = Color.White, fontSize = 16.sp)
+            IconButton(onClick = {
+
+                //toggle drawer
+                isOpen = !isOpen
+
+            }) {
+                Icon(
+                    imageVector = if (isOpen) Icons.Default.KeyboardArrowUp else Icons.Default.ArrowDropDown,
+                    contentDescription = "Drop down"
+                )
+
+            }
+        }
+
+    }
 }
